@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Placeholder character SVG - represents a character wearing a jacket/cardigan (mild weather, ~17-19°C)
+    In production: replace all character_outfit_* drawables with actual illustrated PNG/WebP files.
+    Recommended: hire an illustrator or use a character creator tool (e.g., Avataaars, Ready Player Me).
+-->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="120dp"
+    android:height="200dp"
+    android:viewportWidth="120"
+    android:viewportHeight="200">
+
+    <!-- Body (cardigan - mild weather) -->
+    <!-- Head -->
+    <path android:fillColor="#FDBCB4" android:pathData="M60,20 m-20,0 a20,20 0 1,0 40,0 a20,20 0 1,0 -40,0" />
+    <!-- Hair -->
+    <path android:fillColor="#4A3728" android:pathData="M40,15 Q60,0 80,15 L80,25 Q60,8 40,25 Z" />
+    <!-- Body (jacket) -->
+    <path android:fillColor="#7EB0D5" android:pathData="M35,55 L85,55 L90,120 L30,120 Z" />
+    <!-- Collar/shirt -->
+    <path android:fillColor="#FFFFFF" android:pathData="M50,55 L60,70 L70,55 Z" />
+    <!-- Legs (jeans) -->
+    <path android:fillColor="#5B7FA6" android:pathData="M35,115 L55,115 L52,165 L38,165 Z" />
+    <path android:fillColor="#5B7FA6" android:pathData="M65,115 L85,115 L82,165 L68,165 Z" />
+    <!-- Shoes -->
+    <path android:fillColor="#4A3728" android:pathData="M35,162 L55,162 L57,172 L33,172 Z" />
+    <path android:fillColor="#4A3728" android:pathData="M65,162 L85,162 L87,172 L63,172 Z" />
+    <!-- Arms -->
+    <path android:fillColor="#7EB0D5" android:pathData="M30,55 L18,90 L28,92 L38,58 Z" />
+    <path android:fillColor="#7EB0D5" android:pathData="M90,55 L102,90 L92,92 L82,58 Z" />
+    <!-- Hands -->
+    <path android:fillColor="#FDBCB4" android:pathData="M18,88 m-6,0 a6,6 0 1,0 12,0 a6,6 0 1,0 -12,0" />
+    <path android:fillColor="#FDBCB4" android:pathData="M102,88 m-6,0 a6,6 0 1,0 12,0 a6,6 0 1,0 -12,0" />
+    <!-- Face details -->
+    <path android:fillColor="#000000" android:pathData="M52,22 m-3,0 a3,3 0 1,0 6,0 a3,3 0 1,0 -6,0" />
+    <path android:fillColor="#000000" android:pathData="M68,22 m-3,0 a3,3 0 1,0 6,0 a3,3 0 1,0 -6,0" />
+    <path android:fillColor="#E8877A" android:strokeColor="#E8877A" android:strokeWidth="1.5"
+        android:pathData="M54,30 Q60,35 66,30" />
+</vector>

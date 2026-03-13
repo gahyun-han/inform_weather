@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.InformWeather" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <!-- Primary brand colors -->
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryVariant">@color/primary_dark</item>
+        <item name="colorOnPrimary">@color/white</item>
+
+        <!-- Secondary brand colors -->
+        <item name="colorSecondary">@color/accent_orange</item>
+        <item name="colorSecondaryVariant">@color/accent_orange</item>
+        <item name="colorOnSecondary">@color/white</item>
+
+        <!-- Background colors -->
+        <item name="android:colorBackground">@color/background_light</item>
+        <item name="colorSurface">@color/card_background</item>
+
+        <!-- Status bar -->
+        <item name="android:statusBarColor">@color/primary_dark</item>
+
+        <!-- Action bar -->
+        <item name="actionBarStyle">@style/WeatherActionBar</item>
+    </style>
+
+    <style name="WeatherActionBar" parent="Widget.AppCompat.ActionBar">
+        <item name="background">@color/primary</item>
+        <item name="titleTextStyle">@style/WeatherActionBarTitle</item>
+    </style>
+
+    <style name="WeatherActionBarTitle" parent="TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="Theme.InformWeather.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <!-- Widget theme (transparent for overlay look) -->
+    <style name="Theme.InformWeather.Widget" parent="android:Theme">
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
+</resources>
