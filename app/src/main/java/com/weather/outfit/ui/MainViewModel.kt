@@ -6,6 +6,9 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.weather.outfit.api.PexelsApi
+import com.weather.outfit.api.PexelsPhoto
+import com.weather.outfit.api.getOutfitSearchQuery
 import com.weather.outfit.data.db.AppDatabase
 import com.weather.outfit.data.model.*
 import com.weather.outfit.data.repository.ClothingRepository
@@ -40,6 +43,9 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     private val _feedbackInsight = MutableLiveData<String>()
     val feedbackInsight: LiveData<String> = _feedbackInsight
+
+    private val _outfitImages = MutableLiveData<List<PexelsPhoto>>(emptyList())
+    val outfitImages: LiveData<List<PexelsPhoto>> = _outfitImages
 
     private val _greeting = MutableLiveData<String>()
     val greeting: LiveData<String> = _greeting
@@ -105,6 +111,24 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             userClosetItems = closetItems
         )
         _recommendation.postValue(rec)
+        fetchOutfitImages(rec.characterOutfitKey)
+    }
+
+    private fun fetchOutfitImages(outfitKey: String) {
+        if (PexelsApi.API_KEY == "YOUR_PEXELS_API_KEY") return
+        viewModelScope.launch {
+            try {
+                val query = getOutfitSearchQuery(outfitKey)
+                val response = PexelsApi.service.searchPhotos(
+                    apiKey = PexelsApi.API_KEY,
+                    query = query,
+                    perPage = 6
+                )
+                _outfitImages.postValue(response.photos)
+            } catch (e: Exception) {
+                // Silently fail - images are supplementary
+            }
+        }
     }
 
     /** Load the latest recommendation using cached weather (no network call). */

@@ -1,39 +1,135 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-    Placeholder character SVG - represents a character wearing a jacket/cardigan (mild weather, ~17-19°C)
-    In production: replace all character_outfit_* drawables with actual illustrated PNG/WebP files.
-    Recommended: hire an illustrator or use a character creator tool (e.g., Avataaars, Ready Player Me).
--->
+<!-- Female character - Cardigan + wide-leg pants outfit (17-19°C) -->
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
-    android:width="120dp"
-    android:height="200dp"
-    android:viewportWidth="120"
-    android:viewportHeight="200">
+    android:width="140dp"
+    android:height="260dp"
+    android:viewportWidth="140"
+    android:viewportHeight="260">
 
-    <!-- Body (cardigan - mild weather) -->
-    <!-- Head -->
-    <path android:fillColor="#FDBCB4" android:pathData="M60,20 m-20,0 a20,20 0 1,0 40,0 a20,20 0 1,0 -40,0" />
-    <!-- Hair -->
-    <path android:fillColor="#4A3728" android:pathData="M40,15 Q60,0 80,15 L80,25 Q60,8 40,25 Z" />
-    <!-- Body (jacket) -->
-    <path android:fillColor="#7EB0D5" android:pathData="M35,55 L85,55 L90,120 L30,120 Z" />
-    <!-- Collar/shirt -->
-    <path android:fillColor="#FFFFFF" android:pathData="M50,55 L60,70 L70,55 Z" />
-    <!-- Legs (jeans) -->
-    <path android:fillColor="#5B7FA6" android:pathData="M35,115 L55,115 L52,165 L38,165 Z" />
-    <path android:fillColor="#5B7FA6" android:pathData="M65,115 L85,115 L82,165 L68,165 Z" />
-    <!-- Shoes -->
-    <path android:fillColor="#4A3728" android:pathData="M35,162 L55,162 L57,172 L33,172 Z" />
-    <path android:fillColor="#4A3728" android:pathData="M65,162 L85,162 L87,172 L63,172 Z" />
-    <!-- Arms -->
-    <path android:fillColor="#7EB0D5" android:pathData="M30,55 L18,90 L28,92 L38,58 Z" />
-    <path android:fillColor="#7EB0D5" android:pathData="M90,55 L102,90 L92,92 L82,58 Z" />
-    <!-- Hands -->
-    <path android:fillColor="#FDBCB4" android:pathData="M18,88 m-6,0 a6,6 0 1,0 12,0 a6,6 0 1,0 -12,0" />
-    <path android:fillColor="#FDBCB4" android:pathData="M102,88 m-6,0 a6,6 0 1,0 12,0 a6,6 0 1,0 -12,0" />
-    <!-- Face details -->
-    <path android:fillColor="#000000" android:pathData="M52,22 m-3,0 a3,3 0 1,0 6,0 a3,3 0 1,0 -6,0" />
-    <path android:fillColor="#000000" android:pathData="M68,22 m-3,0 a3,3 0 1,0 6,0 a3,3 0 1,0 -6,0" />
-    <path android:fillColor="#E8877A" android:strokeColor="#E8877A" android:strokeWidth="1.5"
-        android:pathData="M54,30 Q60,35 66,30" />
+    <!-- HAIR BACK -->
+    <path android:fillColor="#1C1008"
+        android:pathData="M46,30 Q38,65 36,120 Q42,118 47,85 Q52,55 56,32 Z"/>
+    <path android:fillColor="#1C1008"
+        android:pathData="M94,30 Q102,65 104,120 Q98,118 93,85 Q88,55 84,32 Z"/>
+
+    <!-- HEAD -->
+    <path android:fillColor="#F5CBA7"
+        android:pathData="M70,10 m-24,0 a24,28 0 1,0 48,0 a24,28 0 1,0 -48,0"/>
+
+    <!-- HAIR FRONT -->
+    <path android:fillColor="#1C1008"
+        android:pathData="M46,12 Q70,2 94,12 Q88,5 70,4 Q52,5 46,12 Z"/>
+    <path android:fillColor="#2A1A0A"
+        android:pathData="M46,12 Q40,24 42,38 Q45,28 52,18 Z"/>
+    <path android:fillColor="#2A1A0A"
+        android:pathData="M94,12 Q100,24 98,38 Q95,28 88,18 Z"/>
+
+    <!-- EYEBROWS -->
+    <path android:fillColor="none" android:strokeColor="#1C1008" android:strokeWidth="2"
+        android:pathData="M55,22 Q60,20 64,22"/>
+    <path android:fillColor="none" android:strokeColor="#1C1008" android:strokeWidth="2"
+        android:pathData="M76,22 Q80,20 85,22"/>
+
+    <!-- EYES -->
+    <path android:fillColor="#FFFFFF"
+        android:pathData="M54,27 Q59,24 65,27 Q59,31 54,27 Z"/>
+    <path android:fillColor="#FFFFFF"
+        android:pathData="M75,27 Q81,24 86,27 Q81,31 75,27 Z"/>
+    <path android:fillColor="#5C3A1E"
+        android:pathData="M57,27 m-3,0 a3,3.5 0 1,0 6,0 a3,3.5 0 1,0 -6,0"/>
+    <path android:fillColor="#5C3A1E"
+        android:pathData="M80,27 m-3,0 a3,3.5 0 1,0 6,0 a3,3.5 0 1,0 -6,0"/>
+    <path android:fillColor="#0D0D0D"
+        android:pathData="M57,27 m-1.5,0 a1.5,1.5 0 1,0 3,0 a1.5,1.5 0 1,0 -3,0"/>
+    <path android:fillColor="#0D0D0D"
+        android:pathData="M80,27 m-1.5,0 a1.5,1.5 0 1,0 3,0 a1.5,1.5 0 1,0 -3,0"/>
+    <path android:fillColor="#FFFFFF"
+        android:pathData="M58,25.5 m-1,0 a1,1 0 1,0 2,0 a1,1 0 1,0 -2,0"/>
+    <path android:fillColor="#FFFFFF"
+        android:pathData="M81,25.5 m-1,0 a1,1 0 1,0 2,0 a1,1 0 1,0 -2,0"/>
+    <path android:fillColor="none" android:strokeColor="#0D0D0D" android:strokeWidth="1.2"
+        android:pathData="M54,26 Q59,23 65,26"/>
+    <path android:fillColor="none" android:strokeColor="#0D0D0D" android:strokeWidth="1.2"
+        android:pathData="M75,26 Q81,23 86,26"/>
+
+    <!-- NOSE -->
+    <path android:fillColor="none" android:strokeColor="#E8A87C" android:strokeWidth="1.2"
+        android:pathData="M68,33 Q70,37 72,33"/>
+
+    <!-- LIPS -->
+    <path android:fillColor="#D4726A"
+        android:pathData="M63,41 Q70,46 77,41 Q70,48 63,41 Z"/>
+    <path android:fillColor="#E8918A"
+        android:pathData="M63,41 Q70,39 77,41"/>
+
+    <!-- CHEEKS -->
+    <path android:fillColor="#FFCDD2" android:alpha="0.5"
+        android:pathData="M48,32 m-6,0 a6,4 0 1,0 12,0 a6,4 0 1,0 -12,0"/>
+    <path android:fillColor="#FFCDD2" android:alpha="0.5"
+        android:pathData="M92,32 m-6,0 a6,4 0 1,0 12,0 a6,4 0 1,0 -12,0"/>
+
+    <!-- NECK -->
+    <path android:fillColor="#F5CBA7"
+        android:pathData="M63,38 L63,56 L77,56 L77,38 Z"/>
+
+    <!-- WHITE INNER SHIRT -->
+    <path android:fillColor="#F5F5F5"
+        android:pathData="M58,56 L82,56 L84,120 L56,120 Z"/>
+    <path android:fillColor="#F5F5F5"
+        android:pathData="M63,56 L70,80 L77,56 Z"/>
+
+    <!-- CARDIGAN (dusty rose) -->
+    <path android:fillColor="#C4929A"
+        android:pathData="M32,60 L63,60 L60,200 L28,200 Z"/>
+    <path android:fillColor="#B8828A"
+        android:pathData="M77,60 L108,60 L112,200 L80,200 Z"/>
+    <path android:fillColor="#C4929A"
+        android:pathData="M63,56 L56,72 L63,60 Z"/>
+    <path android:fillColor="#B8828A"
+        android:pathData="M77,56 L84,72 L77,60 Z"/>
+
+    <!-- Cardigan buttons -->
+    <path android:fillColor="#F5F5F5"
+        android:pathData="M63,90 m-2.5,0 a2.5,2.5 0 1,0 5,0 a2.5,2.5 0 1,0 -5,0"/>
+    <path android:fillColor="#F5F5F5"
+        android:pathData="M63,106 m-2.5,0 a2.5,2.5 0 1,0 5,0 a2.5,2.5 0 1,0 -5,0"/>
+    <path android:fillColor="#F5F5F5"
+        android:pathData="M63,122 m-2.5,0 a2.5,2.5 0 1,0 5,0 a2.5,2.5 0 1,0 -5,0"/>
+
+    <!-- Cardigan hem -->
+    <path android:fillColor="#A8727A"
+        android:pathData="M28,195 L112,195 L112,202 L28,202 Z"/>
+
+    <!-- SLEEVES -->
+    <path android:fillColor="#C4929A"
+        android:pathData="M32,60 L12,145 L28,152 L46,70 Z"/>
+    <path android:fillColor="#B8828A"
+        android:pathData="M108,60 L128,145 L112,152 L94,70 Z"/>
+
+    <!-- HANDS -->
+    <path android:fillColor="#F5CBA7"
+        android:pathData="M10,141 Q6,146 7,154 Q10,160 16,159 Q22,158 23,152 Q24,146 20,141 Z"/>
+    <path android:fillColor="#F5CBA7"
+        android:pathData="M130,141 Q134,146 133,154 Q130,160 124,159 Q118,158 117,152 Q116,146 120,141 Z"/>
+
+    <!-- WIDE-LEG CREAM PANTS -->
+    <path android:fillColor="#EDE0C8"
+        android:pathData="M34,196 L62,196 L58,258 L30,258 Z"/>
+    <path android:fillColor="#E0D3BC"
+        android:pathData="M78,196 L106,196 L110,258 L82,258 Z"/>
+    <path android:fillColor="none" android:strokeColor="#D4C8B0" android:strokeWidth="0.8"
+        android:pathData="M46,196 L44,258"/>
+    <path android:fillColor="none" android:strokeColor="#D4C8B0" android:strokeWidth="0.8"
+        android:pathData="M92,196 L94,258"/>
+
+    <!-- WHITE SNEAKERS -->
+    <path android:fillColor="#F5F5F5" android:strokeColor="#E0E0E0" android:strokeWidth="1"
+        android:pathData="M26,254 Q38,250 58,254 L57,265 Q38,270 24,265 Z"/>
+    <path android:fillColor="#F5F5F5" android:strokeColor="#E0E0E0" android:strokeWidth="1"
+        android:pathData="M82,254 Q96,250 110,254 L111,265 Q96,270 83,265 Z"/>
+    <path android:fillColor="#E0E0E0"
+        android:pathData="M24,263 L58,261 L57,267 L23,268 Z"/>
+    <path android:fillColor="#E0E0E0"
+        android:pathData="M83,263 L111,261 L112,267 L82,268 Z"/>
+
 </vector>

@@ -15,6 +15,8 @@ import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.Priority
 import com.google.android.gms.tasks.CancellationTokenSource
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.weather.outfit.adapter.OutfitImageAdapter
 import com.weather.outfit.data.model.WeatherConditionType
 import com.weather.outfit.databinding.ActivityMainBinding
 import com.weather.outfit.ui.MainViewModel
@@ -29,6 +31,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private val viewModel: MainViewModel by viewModels()
     private lateinit var fusedLocationClient: FusedLocationProviderClient
+    private val outfitImageAdapter = OutfitImageAdapter()
 
     private val locationPermissionRequest = registerForActivityResult(
         ActivityResultContracts.RequestMultiplePermissions()
@@ -79,6 +82,12 @@ class MainActivity : AppCompatActivity() {
         // Pull to refresh
         binding.swipeRefresh.setOnRefreshListener {
             requestWeather()
+        }
+
+        // Outfit reference images RecyclerView
+        binding.rvOutfitImages.apply {
+            layoutManager = LinearLayoutManager(this@MainActivity, LinearLayoutManager.HORIZONTAL, false)
+            adapter = outfitImageAdapter
         }
     }
 
@@ -143,6 +152,15 @@ class MainActivity : AppCompatActivity() {
         viewModel.errorMessage.observe(this) { msg ->
             if (msg != null) {
                 viewModel.clearError()
+            }
+        }
+
+        viewModel.outfitImages.observe(this) { photos ->
+            if (photos.isNotEmpty()) {
+                outfitImageAdapter.submitList(photos)
+                binding.layoutOutfitImages.visibility = View.VISIBLE
+            } else {
+                binding.layoutOutfitImages.visibility = View.GONE
             }
         }
     }

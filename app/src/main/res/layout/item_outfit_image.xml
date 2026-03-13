@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="110dp"
+    android:layout_height="160dp"
+    android:layout_marginEnd="10dp"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="4dp">
+
+    <ImageView
+        android:id="@+id/ivOutfitImage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:contentDescription="추천 코디 이미지"
+        android:scaleType="centerCrop"
+        android:background="#F0F0F0"/>
+
+</androidx.cardview.widget.CardView>
