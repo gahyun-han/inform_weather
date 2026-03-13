@@ -8,6 +8,8 @@ class ClothingRepository(private val clothingDao: ClothingDao) {
 
     fun getAllClothingItems() = clothingDao.getAllClothingItems()
 
+    suspend fun getAllClothingItemsSync() = clothingDao.getAllClothingItemsSync()
+
     fun getByCategory(category: ClothingCategory) = clothingDao.getByCategory(category)
 
     suspend fun getItemsSuitableForTemp(temp: Int) = clothingDao.getItemsSuitableForTemp(temp)
