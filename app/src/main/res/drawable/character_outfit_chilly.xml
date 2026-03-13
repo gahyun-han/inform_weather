@@ -28,9 +28,9 @@
         android:pathData="M46,14 Q44,20 46,26 Q50,18 54,15 Z"/>
 
     <!-- === EYEBROWS === -->
-    <path android:fillColor="none" android:strokeColor="#1C1008" android:strokeWidth="2"
+    <path android:fillColor="@android:color/transparent" android:strokeColor="#1C1008" android:strokeWidth="2"
         android:pathData="M55,22 Q60,20 64,22"/>
-    <path android:fillColor="none" android:strokeColor="#1C1008" android:strokeWidth="2"
+    <path android:fillColor="@android:color/transparent" android:strokeColor="#1C1008" android:strokeWidth="2"
         android:pathData="M76,22 Q80,20 85,22"/>
 
     <!-- === EYES === -->
@@ -55,13 +55,13 @@
     <path android:fillColor="#FFFFFF"
         android:pathData="M81,25.5 m-1,0 a1,1 0 1,0 2,0 a1,1 0 1,0 -2,0"/>
     <!-- Eyelashes (upper) -->
-    <path android:fillColor="none" android:strokeColor="#0D0D0D" android:strokeWidth="1.2"
+    <path android:fillColor="@android:color/transparent" android:strokeColor="#0D0D0D" android:strokeWidth="1.2"
         android:pathData="M54,26 Q59,23 65,26"/>
-    <path android:fillColor="none" android:strokeColor="#0D0D0D" android:strokeWidth="1.2"
+    <path android:fillColor="@android:color/transparent" android:strokeColor="#0D0D0D" android:strokeWidth="1.2"
         android:pathData="M75,26 Q81,23 86,26"/>
 
     <!-- === NOSE === -->
-    <path android:fillColor="none" android:strokeColor="#E8A87C" android:strokeWidth="1.2"
+    <path android:fillColor="@android:color/transparent" android:strokeColor="#E8A87C" android:strokeWidth="1.2"
         android:pathData="M68,33 Q70,37 72,33"/>
 
     <!-- === LIPS === -->
@@ -96,7 +96,7 @@
         android:pathData="M77,56 L88,80 L70,95 L70,58 Z"/>
 
     <!-- Front lapel line -->
-    <path android:fillColor="none" android:strokeColor="#9A7A52" android:strokeWidth="1"
+    <path android:fillColor="@android:color/transparent" android:strokeColor="#9A7A52" android:strokeWidth="1"
         android:pathData="M70,95 L70,200"/>
 
     <!-- Coat buttons -->
@@ -138,10 +138,10 @@
     <!-- === SHOULDER BAG === -->
     <path android:fillColor="#A0784A" android:strokeColor="#8B6532" android:strokeWidth="1.5"
         android:pathData="M118,158 L136,158 L138,186 L116,186 Z"/>
-    <path android:fillColor="none" android:strokeColor="#8B6532" android:strokeWidth="2"
+    <path android:fillColor="@android:color/transparent" android:strokeColor="#8B6532" android:strokeWidth="2"
         android:pathData="M118,158 Q122,140 132,148"/>
     <!-- Bag detail -->
-    <path android:fillColor="none" android:strokeColor="#D4A84B" android:strokeWidth="1"
+    <path android:fillColor="@android:color/transparent" android:strokeColor="#D4A84B" android:strokeWidth="1"
         android:pathData="M120,168 L134,168"/>
     <path android:fillColor="#D4A84B"
         android:pathData="M124,164 m-3,0 a3,3 0 1,0 6,0 a3,3 0 1,0 -6,0"/>

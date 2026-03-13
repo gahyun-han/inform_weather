@@ -25,9 +25,9 @@
         android:pathData="M94,12 Q100,24 98,38 Q95,28 88,18 Z"/>
 
     <!-- EYEBROWS -->
-    <path android:fillColor="none" android:strokeColor="#1C1008" android:strokeWidth="2"
+    <path android:fillColor="@android:color/transparent" android:strokeColor="#1C1008" android:strokeWidth="2"
         android:pathData="M55,22 Q60,20 64,22"/>
-    <path android:fillColor="none" android:strokeColor="#1C1008" android:strokeWidth="2"
+    <path android:fillColor="@android:color/transparent" android:strokeColor="#1C1008" android:strokeWidth="2"
         android:pathData="M76,22 Q80,20 85,22"/>
 
     <!-- EYES -->
@@ -47,13 +47,13 @@
         android:pathData="M58,25.5 m-1,0 a1,1 0 1,0 2,0 a1,1 0 1,0 -2,0"/>
     <path android:fillColor="#FFFFFF"
         android:pathData="M81,25.5 m-1,0 a1,1 0 1,0 2,0 a1,1 0 1,0 -2,0"/>
-    <path android:fillColor="none" android:strokeColor="#0D0D0D" android:strokeWidth="1.2"
+    <path android:fillColor="@android:color/transparent" android:strokeColor="#0D0D0D" android:strokeWidth="1.2"
         android:pathData="M54,26 Q59,23 65,26"/>
-    <path android:fillColor="none" android:strokeColor="#0D0D0D" android:strokeWidth="1.2"
+    <path android:fillColor="@android:color/transparent" android:strokeColor="#0D0D0D" android:strokeWidth="1.2"
         android:pathData="M75,26 Q81,23 86,26"/>
 
     <!-- NOSE -->
-    <path android:fillColor="none" android:strokeColor="#E8A87C" android:strokeWidth="1.2"
+    <path android:fillColor="@android:color/transparent" android:strokeColor="#E8A87C" android:strokeWidth="1.2"
         android:pathData="M68,33 Q70,37 72,33"/>
 
     <!-- LIPS -->
@@ -117,9 +117,9 @@
         android:pathData="M34,196 L62,196 L58,258 L30,258 Z"/>
     <path android:fillColor="#E0D3BC"
         android:pathData="M78,196 L106,196 L110,258 L82,258 Z"/>
-    <path android:fillColor="none" android:strokeColor="#D4C8B0" android:strokeWidth="0.8"
+    <path android:fillColor="@android:color/transparent" android:strokeColor="#D4C8B0" android:strokeWidth="0.8"
         android:pathData="M46,196 L44,258"/>
-    <path android:fillColor="none" android:strokeColor="#D4C8B0" android:strokeWidth="0.8"
+    <path android:fillColor="@android:color/transparent" android:strokeColor="#D4C8B0" android:strokeWidth="0.8"
         android:pathData="M92,196 L94,258"/>
 
     <!-- WHITE SNEAKERS -->
