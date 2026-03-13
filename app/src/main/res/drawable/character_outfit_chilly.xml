@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Female character - Trench coat / Field jacket outfit (9-11°C) -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="140dp"
+    android:height="260dp"
+    android:viewportWidth="140"
+    android:viewportHeight="260">
+
+    <!-- === HAIR BACK === -->
+    <path android:fillColor="#1C1008"
+        android:pathData="M45,30 Q38,60 36,110 Q42,108 46,80 Q50,55 55,32 Z"/>
+    <path android:fillColor="#1C1008"
+        android:pathData="M95,30 Q102,60 104,110 Q98,108 94,80 Q90,55 85,32 Z"/>
+
+    <!-- === HEAD === -->
+    <path android:fillColor="#F5CBA7"
+        android:pathData="M70,10 m-24,0 a24,28 0 1,0 48,0 a24,28 0 1,0 -48,0"/>
+
+    <!-- === HAIR FRONT === -->
+    <path android:fillColor="#1C1008"
+        android:pathData="M46,12 Q70,2 94,12 Q88,6 70,5 Q52,6 46,12 Z"/>
+    <path android:fillColor="#2A1A0A"
+        android:pathData="M46,12 Q40,22 41,36 Q44,28 50,20 Z"/>
+    <path android:fillColor="#2A1A0A"
+        android:pathData="M94,12 Q100,22 99,36 Q96,28 90,20 Z"/>
+    <!-- Side bangs -->
+    <path android:fillColor="#1C1008"
+        android:pathData="M46,14 Q44,20 46,26 Q50,18 54,15 Z"/>
+
+    <!-- === EYEBROWS === -->
+    <path android:fillColor="@android:color/transparent" android:strokeColor="#1C1008" android:strokeWidth="2"
+        android:pathData="M55,22 Q60,20 64,22"/>
+    <path android:fillColor="@android:color/transparent" android:strokeColor="#1C1008" android:strokeWidth="2"
+        android:pathData="M76,22 Q80,20 85,22"/>
+
+    <!-- === EYES === -->
+    <!-- Eye whites -->
+    <path android:fillColor="#FFFFFF"
+        android:pathData="M54,27 Q59,24 65,27 Q59,31 54,27 Z"/>
+    <path android:fillColor="#FFFFFF"
+        android:pathData="M75,27 Q81,24 86,27 Q81,31 75,27 Z"/>
+    <!-- Iris (brown) -->
+    <path android:fillColor="#5C3A1E"
+        android:pathData="M57,27 m-3,0 a3,3.5 0 1,0 6,0 a3,3.5 0 1,0 -6,0"/>
+    <path android:fillColor="#5C3A1E"
+        android:pathData="M80,27 m-3,0 a3,3.5 0 1,0 6,0 a3,3.5 0 1,0 -6,0"/>
+    <!-- Pupils -->
+    <path android:fillColor="#0D0D0D"
+        android:pathData="M57,27 m-1.5,0 a1.5,1.5 0 1,0 3,0 a1.5,1.5 0 1,0 -3,0"/>
+    <path android:fillColor="#0D0D0D"
+        android:pathData="M80,27 m-1.5,0 a1.5,1.5 0 1,0 3,0 a1.5,1.5 0 1,0 -3,0"/>
+    <!-- Eye highlight -->
+    <path android:fillColor="#FFFFFF"
+        android:pathData="M58,25.5 m-1,0 a1,1 0 1,0 2,0 a1,1 0 1,0 -2,0"/>
+    <path android:fillColor="#FFFFFF"
+        android:pathData="M81,25.5 m-1,0 a1,1 0 1,0 2,0 a1,1 0 1,0 -2,0"/>
+    <!-- Eyelashes (upper) -->
+    <path android:fillColor="@android:color/transparent" android:strokeColor="#0D0D0D" android:strokeWidth="1.2"
+        android:pathData="M54,26 Q59,23 65,26"/>
+    <path android:fillColor="@android:color/transparent" android:strokeColor="#0D0D0D" android:strokeWidth="1.2"
+        android:pathData="M75,26 Q81,23 86,26"/>
+
+    <!-- === NOSE === -->
+    <path android:fillColor="@android:color/transparent" android:strokeColor="#E8A87C" android:strokeWidth="1.2"
+        android:pathData="M68,33 Q70,37 72,33"/>
+
+    <!-- === LIPS === -->
+    <path android:fillColor="#D4726A"
+        android:pathData="M63,41 Q70,46 77,41 Q70,48 63,41 Z"/>
+    <path android:fillColor="#E8918A"
+        android:pathData="M63,41 Q70,39 77,41"/>
+
+    <!-- === CHEEKS (blush) === -->
+    <path android:fillColor="#FFCDD2" android:alpha="0.6"
+        android:pathData="M48,32 m-6,0 a6,4 0 1,0 12,0 a6,4 0 1,0 -12,0"/>
+    <path android:fillColor="#FFCDD2" android:alpha="0.6"
+        android:pathData="M92,32 m-6,0 a6,4 0 1,0 12,0 a6,4 0 1,0 -12,0"/>
+
+    <!-- === NECK === -->
+    <path android:fillColor="#F5CBA7"
+        android:pathData="M63,38 L63,56 L77,56 L77,38 Z"/>
+
+    <!-- === TRENCH COAT BODY === -->
+    <!-- Main coat (tan/camel) -->
+    <path android:fillColor="#C9A96E"
+        android:pathData="M28,58 L112,58 L118,200 L22,200 Z"/>
+    <!-- Coat shadow/depth -->
+    <path android:fillColor="#B8926A"
+        android:pathData="M70,58 L70,200 L118,200 L112,58 Z"/>
+
+    <!-- Coat collar left -->
+    <path android:fillColor="#C9A96E"
+        android:pathData="M63,56 L52,80 L70,95 L70,58 Z"/>
+    <!-- Coat collar right -->
+    <path android:fillColor="#B8926A"
+        android:pathData="M77,56 L88,80 L70,95 L70,58 Z"/>
+
+    <!-- Front lapel line -->
+    <path android:fillColor="@android:color/transparent" android:strokeColor="#9A7A52" android:strokeWidth="1"
+        android:pathData="M70,95 L70,200"/>
+
+    <!-- Coat buttons -->
+    <path android:fillColor="#8B6532"
+        android:pathData="M70,108 m-3.5,0 a3.5,3.5 0 1,0 7,0 a3.5,3.5 0 1,0 -7,0"/>
+    <path android:fillColor="#8B6532"
+        android:pathData="M70,124 m-3.5,0 a3.5,3.5 0 1,0 7,0 a3.5,3.5 0 1,0 -7,0"/>
+    <path android:fillColor="#8B6532"
+        android:pathData="M70,140 m-3.5,0 a3.5,3.5 0 1,0 7,0 a3.5,3.5 0 1,0 -7,0"/>
+
+    <!-- === BELT === -->
+    <path android:fillColor="#8B6532"
+        android:pathData="M28,152 L112,152 L112,162 L28,162 Z"/>
+    <!-- Belt buckle -->
+    <path android:fillColor="#D4A84B"
+        android:pathData="M63,149 L77,149 L77,165 L63,165 Z"/>
+    <path android:fillColor="#8B6532"
+        android:pathData="M65,152 L75,152 L75,162 L65,162 Z"/>
+
+    <!-- === SLEEVES === -->
+    <!-- Left sleeve -->
+    <path android:fillColor="#C9A96E"
+        android:pathData="M28,58 L8,148 L24,154 L42,68 Z"/>
+    <!-- Left sleeve shadow -->
+    <path android:fillColor="#B8926A"
+        android:pathData="M8,148 L24,154 L22,145 L10,140 Z"/>
+    <!-- Right sleeve -->
+    <path android:fillColor="#B8926A"
+        android:pathData="M112,58 L132,148 L116,154 L98,68 Z"/>
+
+    <!-- === HANDS === -->
+    <!-- Left hand -->
+    <path android:fillColor="#F5CBA7"
+        android:pathData="M8,144 Q4,148 5,156 Q8,162 14,161 Q20,160 21,154 Q22,148 18,144 Z"/>
+    <!-- Right hand (holding bag) -->
+    <path android:fillColor="#F5CBA7"
+        android:pathData="M132,144 Q136,148 135,156 Q132,162 126,161 Q120,160 119,154 Q118,148 122,144 Z"/>
+
+    <!-- === SHOULDER BAG === -->
+    <path android:fillColor="#A0784A" android:strokeColor="#8B6532" android:strokeWidth="1.5"
+        android:pathData="M118,158 L136,158 L138,186 L116,186 Z"/>
+    <path android:fillColor="@android:color/transparent" android:strokeColor="#8B6532" android:strokeWidth="2"
+        android:pathData="M118,158 Q122,140 132,148"/>
+    <!-- Bag detail -->
+    <path android:fillColor="@android:color/transparent" android:strokeColor="#D4A84B" android:strokeWidth="1"
+        android:pathData="M120,168 L134,168"/>
+    <path android:fillColor="#D4A84B"
+        android:pathData="M124,164 m-3,0 a3,3 0 1,0 6,0 a3,3 0 1,0 -6,0"/>
+
+    <!-- === DARK PANTS (visible below coat) === -->
+    <path android:fillColor="#2C3E50"
+        android:pathData="M36,196 L56,196 L52,258 L34,258 Z"/>
+    <path android:fillColor="#243342"
+        android:pathData="M84,196 L104,196 L106,258 L86,258 Z"/>
+
+    <!-- === SHOES (loafers) === -->
+    <!-- Left shoe -->
+    <path android:fillColor="#1C1008"
+        android:pathData="M30,255 Q42,252 56,255 L55,265 Q42,270 28,265 Z"/>
+    <!-- Right shoe -->
+    <path android:fillColor="#1C1008"
+        android:pathData="M84,255 Q98,252 110,255 L111,265 Q98,270 85,265 Z"/>
+
+</vector>

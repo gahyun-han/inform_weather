@@ -1,0 +1,397 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/swipeRefresh"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/background_light"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Weather Header Section -->
+            <LinearLayout
+                android:id="@+id/layoutWeatherHeader"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_sunny"
+                android:orientation="vertical"
+                android:padding="24dp"
+                android:paddingBottom="32dp">
+
+                <!-- Top bar: date + refresh -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:id="@+id/tvDate"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="@color/white"
+                        android:textSize="14sp"
+                        android:alpha="0.9"
+                        tools:text="3월 13일 금요일" />
+
+                    <ImageButton
+                        android:id="@+id/btnRefresh"
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:contentDescription="새로고침"
+                        android:src="@drawable/ic_refresh"
+                        android:tint="@color/white" />
+                </LinearLayout>
+
+                <!-- Greeting -->
+                <TextView
+                    android:id="@+id/tvGreeting"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    tools:text="좋은 아침이에요! ☀️\n사용자님!" />
+
+                <!-- Temperature + City -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tvTemperature"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:textSize="64sp"
+                        android:textStyle="bold"
+                        tools:text="7°C" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginStart="16dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tvCity"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/white"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            tools:text="서울" />
+
+                        <TextView
+                            android:id="@+id/tvWeatherDesc"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/white"
+                            android:textSize="14sp"
+                            android:alpha="0.9"
+                            tools:text="맑음" />
+
+                        <TextView
+                            android:id="@+id/tvFeelsLike"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/white"
+                            android:textSize="13sp"
+                            android:alpha="0.85"
+                            tools:text="체감 4°C" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!-- Weather Details Row -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tvHumidity"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="@color/white"
+                        android:textSize="12sp"
+                        android:alpha="0.85"
+                        android:drawablePadding="4dp"
+                        tools:text="💧 습도 72%" />
+
+                    <TextView
+                        android:id="@+id/tvWindSpeed"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="@color/white"
+                        android:textSize="12sp"
+                        android:alpha="0.85"
+                        tools:text="💨 바람 3.2m/s" />
+
+                    <TextView
+                        android:id="@+id/tvTempRange"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="@color/white"
+                        android:textSize="12sp"
+                        android:alpha="0.85"
+                        tools:text="최저 4° / 최고 11°" />
+                </LinearLayout>
+
+                <!-- Sensitivity tag -->
+                <TextView
+                    android:id="@+id/tvSensitivity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/bg_tag"
+                    android:paddingHorizontal="10dp"
+                    android:paddingVertical="4dp"
+                    android:textColor="@color/white"
+                    android:textSize="11sp"
+                    android:visibility="gone"
+                    tools:text="추위를 잘 타는 편이에요 🧊"
+                    tools:visibility="visible" />
+
+            </LinearLayout>
+
+            <!-- Progress bar (loading indicator) -->
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="match_parent"
+                android:layout_height="4dp"
+                android:indeterminate="true"
+                android:indeterminateTint="@color/primary"
+                android:visibility="gone"
+                style="@style/Widget.AppCompat.ProgressBar.Horizontal" />
+
+            <!-- Character + Outfit Recommendation Card -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="6dp"
+                app:cardBackgroundColor="@color/card_background">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="16dp">
+
+                    <!-- Character illustration -->
+                    <FrameLayout
+                        android:layout_width="140dp"
+                        android:layout_height="200dp">
+
+                        <ImageView
+                            android:id="@+id/ivCharacter"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:contentDescription="오늘의 날씨 캐릭터"
+                            android:scaleType="fitCenter"
+                            android:src="@drawable/character_outfit_mild" />
+
+                        <!-- Accessory overlays -->
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom|end"
+                            android:orientation="horizontal"
+                            android:padding="4dp">
+
+                            <ImageView
+                                android:id="@+id/ivUmbrella"
+                                android:layout_width="28dp"
+                                android:layout_height="28dp"
+                                android:src="@drawable/ic_umbrella"
+                                android:contentDescription="우산 필요"
+                                android:visibility="gone" />
+
+                            <ImageView
+                                android:id="@+id/ivSunscreen"
+                                android:layout_width="28dp"
+                                android:layout_height="28dp"
+                                android:layout_marginStart="4dp"
+                                android:src="@drawable/ic_sunscreen"
+                                android:contentDescription="자외선 차단제"
+                                android:visibility="gone" />
+                        </LinearLayout>
+                    </FrameLayout>
+
+                    <!-- Outfit description -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginStart="12dp"
+                        android:orientation="vertical"
+                        android:gravity="center_vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="오늘의 추천 코디"
+                            android:textColor="@color/text_secondary"
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:id="@+id/tvOutfitDescription"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="6dp"
+                            android:textColor="@color/text_primary"
+                            android:textSize="15sp"
+                            android:lineSpacingExtra="4dp"
+                            tools:text="트렌치코트나 야상이 딱이에요\n우산을 챙기세요 ☂️" />
+
+                        <!-- Weather tip -->
+                        <TextView
+                            android:id="@+id/tvWeatherTip"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp"
+                            android:background="@drawable/bg_tip"
+                            android:padding="10dp"
+                            android:textColor="@color/primary_dark"
+                            android:textSize="13sp"
+                            android:visibility="gone"
+                            tools:text="눈이 올 예정이에요! 방수 신발 추천 ❄️"
+                            tools:visibility="visible" />
+                    </LinearLayout>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Feedback prompt card -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardFeedbackPrompt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginBottom="8dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="2dp"
+                app:cardBackgroundColor="@color/accent_light">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="14dp"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="오늘 코디가 어떠셨나요?\n피드백을 남겨주시면 더 잘 맞는 코디를 추천해드려요 😊"
+                        android:textSize="13sp"
+                        android:lineSpacingExtra="3dp"
+                        android:textColor="@color/text_primary" />
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_arrow_right"
+                        android:tint="@color/primary"
+                        android:contentDescription="피드백 남기기" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Outfit Reference Images (from Pexels) -->
+            <LinearLayout
+                android:id="@+id/layoutOutfitImages"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginBottom="8dp"
+                android:visibility="gone"
+                tools:visibility="visible">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="이런 코디 어때요? 👗"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/text_primary"
+                    android:layout_marginBottom="10dp" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvOutfitImages"
+                    android:layout_width="match_parent"
+                    android:layout_height="160dp"
+                    android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:listitem="@layout/item_outfit_image"
+                    tools:itemCount="4" />
+            </LinearLayout>
+
+            <!-- Feedback insight -->
+            <TextView
+                android:id="@+id/tvFeedbackInsight"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginBottom="8dp"
+                android:textSize="13sp"
+                android:textColor="@color/text_secondary"
+                android:visibility="gone"
+                tools:text="요즘 추위를 많이 느끼시는 것 같아요 🧊"
+                tools:visibility="visible" />
+
+            <!-- Bottom navigation buttons -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="16dp"
+                android:layout_marginBottom="16dp">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnCloset"
+                    android:layout_width="0dp"
+                    android:layout_height="56dp"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="8dp"
+                    android:text="👚 MY CLOSET"
+                    android:textSize="14sp"
+                    app:cornerRadius="12dp"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnFeedback"
+                    android:layout_width="0dp"
+                    android:layout_height="56dp"
+                    android:layout_weight="1"
+                    android:layout_marginStart="8dp"
+                    android:text="📝 오늘 코디 피드백"
+                    android:textSize="14sp"
+                    app:cornerRadius="12dp" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

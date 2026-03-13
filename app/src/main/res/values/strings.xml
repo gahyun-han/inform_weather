@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">날씨 코디</string>
+
+    <!-- Weather -->
+    <string name="weather_clear">맑음</string>
+    <string name="weather_clouds">구름</string>
+    <string name="weather_rain">비</string>
+    <string name="weather_snow">눈</string>
+    <string name="weather_thunderstorm">천둥번개</string>
+    <string name="weather_drizzle">이슬비</string>
+    <string name="weather_mist">안개</string>
+
+    <!-- Outfit categories array -->
+    <string-array name="clothing_categories">
+        <item>상의 (Top)</item>
+        <item>하의 (Bottom)</item>
+        <item>아우터 (Outer)</item>
+        <item>신발 (Shoes)</item>
+        <item>악세서리 (Accessory)</item>
+        <item>원피스/드레스</item>
+        <item>이너웨어</item>
+    </string-array>
+
+    <!-- Notifications -->
+    <string name="notif_morning_title">오늘 코디 추천 👕</string>
+    <string name="notif_morning_text">오늘 날씨에 맞는 코디를 확인해보세요!</string>
+
+    <!-- Errors -->
+    <string name="error_network">네트워크 연결을 확인해주세요</string>
+    <string name="error_location">위치 정보를 가져올 수 없어요</string>
+    <string name="error_api_key">날씨 API 키를 설정해주세요</string>
+
+    <!-- Content descriptions -->
+    <string name="cd_character">오늘 날씨 코디 캐릭터</string>
+    <string name="cd_refresh">날씨 새로고침</string>
+    <string name="cd_closet">내 옷장 보기</string>
+    <string name="cd_feedback">코디 피드백</string>
+</resources>
