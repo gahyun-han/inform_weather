@@ -10,71 +10,47 @@
     app:cardElevation="3dp"
     app:cardBackgroundColor="@color/card_background">
 
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="160dp">
 
         <!-- Clothing image -->
         <ImageView
             android:id="@+id/ivClothingThumbnail"
             android:layout_width="match_parent"
-            android:layout_height="140dp"
+            android:layout_height="match_parent"
             android:background="@color/image_background"
             android:contentDescription="옷 사진"
             android:scaleType="centerCrop"
             android:src="@drawable/ic_clothing_placeholder" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <!-- Category badge (bottom-left) -->
+        <TextView
+            android:id="@+id/tvCategory"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="10dp">
+            android:layout_gravity="bottom|start"
+            android:layout_margin="8dp"
+            android:background="@drawable/bg_category_tag"
+            android:paddingHorizontal="8dp"
+            android:paddingVertical="3dp"
+            android:textSize="11sp"
+            android:textColor="@color/primary"
+            tools:text="아우터" />
 
-            <!-- Category tag -->
-            <TextView
-                android:id="@+id/tvCategory"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/bg_category_tag"
-                android:paddingHorizontal="8dp"
-                android:paddingVertical="2dp"
-                android:textSize="10sp"
-                android:textColor="@color/primary"
-                tools:text="아우터" />
+        <!-- Delete button (top-right) -->
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabDeleteClothing"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top|end"
+            android:layout_margin="6dp"
+            app:fabSize="mini"
+            app:srcCompat="@drawable/ic_remove"
+            android:contentDescription="삭제"
+            android:backgroundTint="#CCF44336"
+            app:tint="@color/white" />
 
-            <!-- Name -->
-            <TextView
-                android:id="@+id/tvClothingName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                android:textColor="@color/text_primary"
-                android:maxLines="2"
-                android:ellipsize="end"
-                tools:text="베이지 트렌치코트" />
+    </FrameLayout>
 
-            <!-- Warmth stars -->
-            <TextView
-                android:id="@+id/tvWarmthStars"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:textSize="11sp"
-                android:textColor="@color/accent_orange"
-                tools:text="★★★☆☆" />
-
-            <!-- Temp range -->
-            <TextView
-                android:id="@+id/tvTempRange"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
-                android:textSize="11sp"
-                android:textColor="@color/text_secondary"
-                tools:text="5°~15°" />
-        </LinearLayout>
-    </LinearLayout>
 </androidx.cardview.widget.CardView>

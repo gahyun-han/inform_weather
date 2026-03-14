@@ -5,7 +5,6 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.provider.MediaStore
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -18,6 +17,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.chip.Chip
 import com.weather.outfit.adapter.ClothingAdapter
 import com.weather.outfit.adapter.NaverShoppingAdapter
+import com.weather.outfit.api.NaverShoppingItem
 import com.weather.outfit.data.model.ClothingCategory
 import com.weather.outfit.data.model.ClothingItem
 import com.weather.outfit.databinding.ActivityClosetBinding
@@ -33,6 +33,7 @@ class ClosetActivity : AppCompatActivity() {
     private lateinit var clothingAdapter: ClothingAdapter
     private lateinit var catalogAdapter: NaverShoppingAdapter
 
+    private var isCatalogOpen = false
     private var pendingImageUri: Uri? = null
     private var tempCameraFile: File? = null
 
@@ -71,12 +72,10 @@ class ClosetActivity : AppCompatActivity() {
         setupClosetRecyclerView()
         setupCatalogRecyclerView()
         setupCategoryChips()
-        setupTabToggle()
-        setupFab()
+        setupFabs()
         observeViewModel()
 
-        // Default: 내 옷장 tab checked
-        binding.tabToggle.check(R.id.btnTabCloset)
+        showClosetSection()
     }
 
     // ===== SETUP =====
@@ -91,6 +90,9 @@ class ClosetActivity : AppCompatActivity() {
             },
             onItemLongClick = { item ->
                 showDeleteDialog(item)
+            },
+            onDeleteClick = { item ->
+                showDeleteDialog(item)
             }
         )
         binding.rvClothing.layoutManager = GridLayoutManager(this, 2)
@@ -99,17 +101,19 @@ class ClosetActivity : AppCompatActivity() {
 
     private fun setupCatalogRecyclerView() {
         catalogAdapter = NaverShoppingAdapter { item ->
-            try {
-                startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(item.link)))
-            } catch (e: Exception) {
-                Toast.makeText(this, "링크를 열 수 없어요", Toast.LENGTH_SHORT).show()
-            }
+            val name = item.cleanTitle.take(40)
+            val category = detectCategoryFromNaver(item)
+            viewModel.addFromNaverItem(item, name, category)
         }
         binding.rvCatalog.layoutManager = GridLayoutManager(this, 2)
         binding.rvCatalog.adapter = catalogAdapter
 
         binding.btnLoadMore.setOnClickListener {
             viewModel.loadMoreCatalog()
+        }
+
+        binding.btnCloseCatalog.setOnClickListener {
+            showClosetSection()
         }
     }
 
@@ -159,40 +163,35 @@ class ClosetActivity : AppCompatActivity() {
         }
     }
 
-    private fun setupTabToggle() {
-        binding.tabToggle.addOnButtonCheckedListener { _, checkedId, isChecked ->
-            if (!isChecked) return@addOnButtonCheckedListener
-            when (checkedId) {
-                R.id.btnTabCloset -> showClosetSection()
-                R.id.btnTabCatalog -> showCatalogSection()
-            }
-        }
-    }
-
-    private fun setupFab() {
+    private fun setupFabs() {
         binding.fabAddClothing.setOnClickListener {
             checkPermissionsAndShowDialog()
         }
+        binding.fabAddSimilarStyle.setOnClickListener {
+            showCatalogSection()
+        }
     }
 
-    // ===== TAB SWITCHING =====
+    // ===== SECTION SWITCHING =====
 
     private fun showClosetSection() {
+        isCatalogOpen = false
         binding.sectionCloset.visibility = View.VISIBLE
         binding.sectionCatalog.visibility = View.GONE
-        binding.fabAddClothing.visibility = View.VISIBLE
+        binding.fabContainer.visibility = View.VISIBLE
+        supportActionBar?.title = "MY CLOSET"
     }
 
     private fun showCatalogSection() {
+        isCatalogOpen = true
         binding.sectionCloset.visibility = View.GONE
         binding.sectionCatalog.visibility = View.VISIBLE
-        binding.fabAddClothing.visibility = View.GONE
+        binding.fabContainer.visibility = View.GONE
+        supportActionBar?.title = "유사스타일 추가"
 
-        // Load on first open (gender toggle triggers search via listener if already checked)
         if (!viewModel.catalogLoaded) {
             if (binding.genderToggle.checkedButtonId == View.NO_ID) {
                 binding.genderToggle.check(R.id.btnGenderFemale)
-                // listener will call searchCatalog
             } else {
                 viewModel.searchCatalog("female", "ALL")
             }
@@ -202,7 +201,6 @@ class ClosetActivity : AppCompatActivity() {
     // ===== OBSERVE =====
 
     private fun observeViewModel() {
-        // My Closet
         viewModel.filteredItems.observe(this) { items ->
             clothingAdapter.submitList(items)
             binding.tvEmptyCloset.visibility = if (items.isEmpty()) View.VISIBLE else View.GONE
@@ -220,7 +218,6 @@ class ClosetActivity : AppCompatActivity() {
             }
         }
 
-        // Catalog
         viewModel.catalogItems.observe(this) { items ->
             catalogAdapter.submitList(items)
             val isEmpty = items.isEmpty() && viewModel.catalogLoading.value != true
@@ -319,6 +316,21 @@ class ClosetActivity : AppCompatActivity() {
         )
     }
 
+    // ===== NAVER CATALOG ACTIONS =====
+
+    private fun detectCategoryFromNaver(item: NaverShoppingItem): ClothingCategory {
+        val cat2 = item.category2.lowercase()
+        val cat3 = item.category3.lowercase()
+        return when {
+            cat2.contains("신발") || cat3.contains("운동화") || cat3.contains("부츠") || cat3.contains("샌들") -> ClothingCategory.SHOES
+            cat2.contains("가방") || cat2.contains("액세서리") || cat2.contains("악세서리") || cat3.contains("모자") || cat3.contains("스카프") -> ClothingCategory.ACCESSORY
+            cat3.contains("원피스") || cat3.contains("드레스") -> ClothingCategory.DRESS
+            cat3.contains("재킷") || cat3.contains("코트") || cat3.contains("점퍼") || cat3.contains("패딩") || cat3.contains("아우터") -> ClothingCategory.OUTER
+            cat3.contains("바지") || cat3.contains("청바지") || cat3.contains("스커트") || cat3.contains("치마") || cat3.contains("레깅스") -> ClothingCategory.BOTTOM
+            else -> ClothingCategory.TOP
+        }
+    }
+
     private fun showDeleteDialog(item: ClothingItem) {
         AlertDialog.Builder(this)
             .setTitle("옷 삭제")
@@ -356,7 +368,20 @@ class ClosetActivity : AppCompatActivity() {
             .show()
     }
 
+    @Deprecated("Deprecated in Java")
+    override fun onBackPressed() {
+        if (isCatalogOpen) {
+            showClosetSection()
+        } else {
+            super.onBackPressed()
+        }
+    }
+
     override fun onSupportNavigateUp(): Boolean {
+        if (isCatalogOpen) {
+            showClosetSection()
+            return true
+        }
         onBackPressed()
         return true
     }

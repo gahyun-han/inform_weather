@@ -8,6 +8,7 @@ import android.os.Environment
 import androidx.core.content.FileProvider
 import java.io.File
 import java.io.FileOutputStream
+import java.net.URL
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -106,6 +107,20 @@ object ImageUtils {
             sampleSize *= 2
         }
         return sampleSize
+    }
+
+    /**
+     * Downloads an image from a URL and saves it to app storage. Returns the file path.
+     * Must be called from a background coroutine (does network I/O).
+     */
+    fun downloadImageFromUrl(context: Context, url: String, fileName: String): String? {
+        return try {
+            val bitmap = URL(url).openStream().use { BitmapFactory.decodeStream(it) }
+                ?: return null
+            saveBitmapToStorage(context, bitmap, fileName)
+        } catch (e: Exception) {
+            null
+        }
     }
 
     /**

@@ -24,6 +24,8 @@ data class NaverShoppingItem(
     @SerializedName("brand") val brand: String = "",
     @SerializedName("category1") val category1: String = "",
     @SerializedName("category2") val category2: String = "",
+    @SerializedName("category3") val category3: String = "",
+    @SerializedName("category4") val category4: String = "",
     @SerializedName("productId") val productId: String = ""
 ) {
     val cleanTitle: String
@@ -95,7 +97,16 @@ fun getNaverCatalogQuery(gender: String, categoryKey: String): String {
         "SHOES" -> "$g 신발"
         "ACCESSORY" -> "$g 액세서리"
         "DRESS" -> if (gender == "female") "여성 원피스" else "남성 점프수트"
-        "UNDERWEAR" -> "$g 이너웨어"
-        else -> "$g 패션"
+        else -> "$g 패션코디"
     }
+}
+
+private val UNDERWEAR_KEYWORDS = setOf(
+    "이너웨어", "속옷", "언더웨어", "란제리", "브라", "팬티",
+    "내의", "내복", "보정", "거들", "브래지어"
+)
+
+fun NaverShoppingItem.isUnderwear(): Boolean {
+    val combined = "$category1 $category2 $category3 $category4 $title".lowercase()
+    return UNDERWEAR_KEYWORDS.any { combined.contains(it) }
 }

@@ -15,13 +15,31 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/ivProductImage"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:scaleType="centerCrop"
-            android:background="@color/image_background"
-            android:contentDescription="상품 이미지" />
+            android:layout_height="150dp">
+
+            <ImageView
+                android:id="@+id/ivProductImage"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:background="@color/image_background"
+                android:contentDescription="상품 이미지" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fabAddToCloset"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|end"
+                android:layout_margin="8dp"
+                app:fabSize="mini"
+                app:srcCompat="@drawable/ic_add"
+                android:contentDescription="내 옷장에 추가"
+                android:backgroundTint="@color/white"
+                app:tint="@color/primary" />
+
+        </FrameLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -60,5 +78,6 @@
                 tools:text="무신사" />
 
         </LinearLayout>
+
     </LinearLayout>
 </androidx.cardview.widget.CardView>

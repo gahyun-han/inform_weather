@@ -9,12 +9,15 @@ import androidx.lifecycle.viewModelScope
 import com.weather.outfit.api.NaverShoppingApi
 import com.weather.outfit.api.NaverShoppingItem
 import com.weather.outfit.api.getNaverCatalogQuery
+import com.weather.outfit.api.isUnderwear
 import com.weather.outfit.data.db.AppDatabase
 import com.weather.outfit.data.model.ClothingCategory
 import com.weather.outfit.data.model.ClothingItem
 import com.weather.outfit.data.repository.ClothingRepository
 import com.weather.outfit.util.ImageUtils
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class ClosetViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -105,6 +108,34 @@ class ClosetViewModel(application: Application) : AndroidViewModel(application) 
         }
     }
 
+    fun addFromNaverItem(
+        item: NaverShoppingItem,
+        name: String,
+        category: ClothingCategory
+    ) {
+        viewModelScope.launch {
+            val imagePath = withContext(Dispatchers.IO) {
+                try {
+                    val fileName = "naver_${item.productId}_${System.currentTimeMillis()}"
+                    ImageUtils.downloadImageFromUrl(getApplication(), item.image, fileName) ?: ""
+                } catch (e: Exception) {
+                    ""
+                }
+            }
+            val clothingItem = ClothingItem(
+                name = name,
+                category = category,
+                warmthLevel = 3,
+                minTemp = -10,
+                maxTemp = 35,
+                imagePath = imagePath
+            )
+            repo.addClothingItem(clothingItem)
+            _operationStatus.value = "\"$name\"이(가) 내 옷장에 추가되었어요 👕"
+            loadCount()
+        }
+    }
+
     fun updateClothingItem(item: ClothingItem) {
         viewModelScope.launch {
             repo.updateClothingItem(item)
@@ -182,8 +213,9 @@ class ClosetViewModel(application: Application) : AndroidViewModel(application) 
                     display = catalogPageSize,
                     start = catalogStart
                 )
+                val filtered = response.items.filterNot { it.isUnderwear() }
                 val existing = if (catalogStart == 1) emptyList() else (_catalogItems.value ?: emptyList())
-                _catalogItems.value = existing + response.items
+                _catalogItems.value = existing + filtered
                 catalogLoaded = true
             } catch (e: Exception) {
                 _catalogError.value = "상품을 불러오지 못했어요\n잠시 후 다시 시도해주세요"

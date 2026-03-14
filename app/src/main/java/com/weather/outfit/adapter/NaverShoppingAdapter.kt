@@ -11,7 +11,7 @@ import com.weather.outfit.api.NaverShoppingItem
 import com.weather.outfit.databinding.ItemNaverProductBinding
 
 class NaverShoppingAdapter(
-    private val onItemClick: (NaverShoppingItem) -> Unit = {}
+    private val onAddToCloset: (NaverShoppingItem) -> Unit = {}
 ) : ListAdapter<NaverShoppingItem, NaverShoppingAdapter.ViewHolder>(DIFF_CALLBACK) {
 
     inner class ViewHolder(private val binding: ItemNaverProductBinding) :
@@ -28,7 +28,7 @@ class NaverShoppingAdapter(
                 .centerCrop()
                 .into(binding.ivProductImage)
 
-            binding.root.setOnClickListener { onItemClick(item) }
+            binding.fabAddToCloset.setOnClickListener { onAddToCloset(item) }
         }
     }
 

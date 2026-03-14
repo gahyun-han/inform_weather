@@ -13,19 +13,16 @@ import java.io.File
 
 class ClothingAdapter(
     private val onItemClick: (ClothingItem) -> Unit,
-    private val onItemLongClick: (ClothingItem) -> Unit
+    private val onItemLongClick: (ClothingItem) -> Unit,
+    private val onDeleteClick: (ClothingItem) -> Unit = {}
 ) : ListAdapter<ClothingItem, ClothingAdapter.ViewHolder>(DIFF_CALLBACK) {
 
     inner class ViewHolder(private val binding: ItemClothingBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: ClothingItem) {
-            binding.tvClothingName.text = item.name
             binding.tvCategory.text = item.category.koreanName
-            binding.tvWarmthStars.text = "★".repeat(item.warmthLevel) + "☆".repeat(5 - item.warmthLevel)
-            binding.tvTempRange.text = "${item.minTemp}°~${item.maxTemp}°"
 
-            // Load image
             if (item.imagePath.isNotEmpty() && File(item.imagePath).exists()) {
                 Glide.with(binding.root.context)
                     .load(File(item.imagePath))
@@ -41,6 +38,7 @@ class ClothingAdapter(
                 onItemLongClick(item)
                 true
             }
+            binding.fabDeleteClothing.setOnClickListener { onDeleteClick(item) }
         }
     }
 

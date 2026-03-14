@@ -40,40 +40,6 @@
                 android:alpha="0.8" />
         </LinearLayout>
 
-        <!-- Tab Toggle: 내 옷장 / 쇼핑 카탈로그 -->
-        <com.google.android.material.button.MaterialButtonToggleGroup
-            android:id="@+id/tabToggle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:paddingHorizontal="12dp"
-            android:paddingVertical="8dp"
-            app:singleSelection="true"
-            app:selectionRequired="true">
-
-            <Button
-                android:id="@+id/btnTabCloset"
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="내 옷장"
-                android:textSize="14sp" />
-
-            <Button
-                android:id="@+id/btnTabCatalog"
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="쇼핑 카탈로그"
-                android:textSize="14sp"
-                android:textColor="#0099CC"
-                app:strokeColor="#0099CC"
-                app:strokeWidth="2dp" />
-
-        </com.google.android.material.button.MaterialButtonToggleGroup>
-
         <!-- Content area -->
         <FrameLayout
             android:layout_width="match_parent"
@@ -171,13 +137,43 @@
                 android:orientation="vertical"
                 android:visibility="gone">
 
+                <!-- Catalog header with close button -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:paddingHorizontal="12dp"
+                    android:paddingVertical="10dp"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:elevation="4dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="유사스타일 추가"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/text_primary" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnCloseCatalog"
+                        style="@style/Widget.MaterialComponents.Button.TextButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="✕ 닫기"
+                        android:textColor="@color/text_secondary"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
                 <!-- Gender toggle -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/white"
                     android:paddingHorizontal="12dp"
-                    android:paddingVertical="8dp"
+                    android:paddingBottom="8dp"
                     android:orientation="horizontal"
                     android:gravity="center">
 
@@ -338,14 +334,34 @@
         </FrameLayout>
     </LinearLayout>
 
-    <!-- FAB: Add clothing (내 옷장 탭에서만 표시) -->
-    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-        android:id="@+id/fabAddClothing"
+    <!-- FABs: stacked at bottom-right -->
+    <LinearLayout
+        android:id="@+id/fabContainer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
+        android:orientation="vertical"
         android:layout_margin="16dp"
-        android:text="옷 추가"
-        app:icon="@drawable/ic_add" />
+        android:gravity="end">
+
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            android:id="@+id/fabAddSimilarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="+유사스타일 추가"
+            app:icon="@drawable/ic_add"
+            android:backgroundTint="#0099CC"
+            android:textColor="@color/white"
+            app:iconTint="@color/white" />
+
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            android:id="@+id/fabAddClothing"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="+내 옷 사진 추가"
+            app:icon="@drawable/ic_add" />
+
+    </LinearLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
