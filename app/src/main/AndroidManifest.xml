@@ -74,6 +74,13 @@
             android:screenOrientation="portrait"
             android:parentActivityName=".ClosetActivity" />
 
+        <!-- Settings Activity -->
+        <activity
+            android:name=".SettingsActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".MainActivity" />
+
         <!-- Widget Provider -->
         <receiver
             android:name=".widget.WeatherWidgetProvider"

@@ -1,0 +1,14 @@
+# local.properties.example
+# 이 파일을 local.properties로 복사하고 실제 API 키를 입력하세요.
+# local.properties는 git에 커밋되지 않습니다.
+
+# OpenWeatherMap API Key (https://openweathermap.org/api)
+WEATHER_API_KEY=여기에_OpenWeatherMap_API_키_입력
+
+# Naver Shopping API Keys (https://developers.naver.com/apps/#/register)
+# '애플리케이션 등록' > 검색 API 사용 신청 후 발급
+NAVER_CLIENT_ID=여기에_네이버_Client_ID_입력
+NAVER_CLIENT_SECRET=여기에_네이버_Client_Secret_입력
+
+# Android SDK 경로 (Android Studio가 자동으로 설정하지만, 수동 설정도 가능)
+# sdk.dir=/Users/yourname/Library/Android/sdk

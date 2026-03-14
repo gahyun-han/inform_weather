@@ -12,7 +12,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <!-- Closet count summary -->
+        <!-- Header: Closet count summary -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -40,82 +40,305 @@
                 android:alpha="0.8" />
         </LinearLayout>
 
-        <!-- Category filter chips -->
-        <HorizontalScrollView
+        <!-- Tab Toggle: 내 옷장 / 쇼핑 카탈로그 -->
+        <com.google.android.material.button.MaterialButtonToggleGroup
+            android:id="@+id/tabToggle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:scrollbars="none"
             android:background="@color/white"
-            android:paddingVertical="8dp">
+            android:paddingHorizontal="12dp"
+            android:paddingVertical="8dp"
+            app:singleSelection="true"
+            app:selectionRequired="true">
 
-            <com.google.android.material.chip.ChipGroup
-                android:id="@+id/chipGroupCategory"
-                android:layout_width="wrap_content"
+            <Button
+                android:id="@+id/btnTabCloset"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:paddingHorizontal="12dp"
-                app:singleSelection="true">
+                android:layout_weight="1"
+                android:text="내 옷장"
+                android:textSize="14sp" />
 
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chipAll"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="전체"
-                    android:checked="true"
-                    style="@style/Widget.MaterialComponents.Chip.Filter" />
-
-            </com.google.android.material.chip.ChipGroup>
-        </HorizontalScrollView>
-
-        <!-- Empty state -->
-        <LinearLayout
-            android:id="@+id/tvEmptyCloset"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:visibility="visible">
-
-            <TextView
-                android:layout_width="wrap_content"
+            <Button
+                android:id="@+id/btnTabCatalog"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="👗"
-                android:textSize="64sp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="아직 옷이 없어요"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:textColor="@color/text_primary" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="+ 버튼을 눌러 내 옷을 추가해보세요!\n캐릭터가 내 옷을 입어서 코디를 보여줄 거예요 😊"
+                android:layout_weight="1"
+                android:text="쇼핑 카탈로그"
                 android:textSize="14sp"
-                android:textColor="@color/text_secondary"
-                android:gravity="center"
-                android:lineSpacingExtra="4dp" />
-        </LinearLayout>
+                android:textColor="#0099CC"
+                app:strokeColor="#0099CC"
+                app:strokeWidth="2dp" />
 
-        <!-- Clothing grid -->
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvClothing"
+        </com.google.android.material.button.MaterialButtonToggleGroup>
+
+        <!-- Content area -->
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
-            android:padding="8dp"
-            android:clipToPadding="false"
-            android:visibility="gone"
-            tools:listitem="@layout/item_clothing"
-            tools:itemCount="6" />
+            android:layout_weight="1">
+
+            <!-- ===== MY CLOSET SECTION ===== -->
+            <LinearLayout
+                android:id="@+id/sectionCloset"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:visibility="visible">
+
+                <!-- Category filter chips -->
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:scrollbars="none"
+                    android:background="@color/white"
+                    android:paddingVertical="8dp">
+
+                    <com.google.android.material.chip.ChipGroup
+                        android:id="@+id/chipGroupCategory"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingHorizontal="12dp"
+                        app:singleSelection="true">
+
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/chipAll"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="전체"
+                            android:checked="true"
+                            style="@style/Widget.MaterialComponents.Chip.Filter" />
+
+                    </com.google.android.material.chip.ChipGroup>
+                </HorizontalScrollView>
+
+                <!-- Empty state -->
+                <LinearLayout
+                    android:id="@+id/tvEmptyCloset"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:visibility="visible">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="👗"
+                        android:textSize="64sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:text="아직 옷이 없어요"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/text_primary" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="+ 버튼을 눌러 내 옷을 추가해보세요!\n캐릭터가 내 옷을 입어서 코디를 보여줄 거예요 😊"
+                        android:textSize="14sp"
+                        android:textColor="@color/text_secondary"
+                        android:gravity="center"
+                        android:lineSpacingExtra="4dp" />
+                </LinearLayout>
+
+                <!-- Clothing grid -->
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvClothing"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:padding="8dp"
+                    android:clipToPadding="false"
+                    android:visibility="gone"
+                    tools:listitem="@layout/item_clothing"
+                    tools:itemCount="6" />
+            </LinearLayout>
+
+            <!-- ===== CATALOG SECTION ===== -->
+            <LinearLayout
+                android:id="@+id/sectionCatalog"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <!-- Gender toggle -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:paddingHorizontal="12dp"
+                    android:paddingVertical="8dp"
+                    android:orientation="horizontal"
+                    android:gravity="center">
+
+                    <com.google.android.material.button.MaterialButtonToggleGroup
+                        android:id="@+id/genderToggle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:singleSelection="true"
+                        app:selectionRequired="true">
+
+                        <Button
+                            android:id="@+id/btnGenderFemale"
+                            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="여성"
+                            android:textSize="14sp" />
+
+                        <Button
+                            android:id="@+id/btnGenderMale"
+                            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="남성"
+                            android:textSize="14sp" />
+                    </com.google.android.material.button.MaterialButtonToggleGroup>
+                </LinearLayout>
+
+                <!-- Catalog category chips -->
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:scrollbars="none"
+                    android:background="@color/white"
+                    android:paddingVertical="8dp">
+
+                    <com.google.android.material.chip.ChipGroup
+                        android:id="@+id/chipGroupCatalogCategory"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingHorizontal="12dp"
+                        app:singleSelection="true">
+
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/chipCatalogAll"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="전체"
+                            android:checked="true"
+                            style="@style/Widget.MaterialComponents.Chip.Filter" />
+
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/chipCatalogTop"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="상의"
+                            style="@style/Widget.MaterialComponents.Chip.Filter" />
+
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/chipCatalogBottom"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="하의"
+                            style="@style/Widget.MaterialComponents.Chip.Filter" />
+
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/chipCatalogOuter"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="아우터"
+                            style="@style/Widget.MaterialComponents.Chip.Filter" />
+
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/chipCatalogDress"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="원피스"
+                            style="@style/Widget.MaterialComponents.Chip.Filter" />
+
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/chipCatalogShoes"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="신발"
+                            style="@style/Widget.MaterialComponents.Chip.Filter" />
+
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/chipCatalogAccessory"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="악세서리"
+                            style="@style/Widget.MaterialComponents.Chip.Filter" />
+
+                    </com.google.android.material.chip.ChipGroup>
+                </HorizontalScrollView>
+
+                <!-- Catalog RecyclerView + loading/empty overlay -->
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rvCatalog"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="8dp"
+                        android:clipToPadding="false"
+                        tools:listitem="@layout/item_naver_product"
+                        tools:itemCount="6" />
+
+                    <!-- Loading spinner -->
+                    <ProgressBar
+                        android:id="@+id/pbCatalogLoading"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:visibility="gone" />
+
+                    <!-- Empty / Error state -->
+                    <LinearLayout
+                        android:id="@+id/layoutCatalogEmpty"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:visibility="gone">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="🛍️"
+                            android:textSize="48sp" />
+
+                        <TextView
+                            android:id="@+id/tvCatalogError"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp"
+                            android:textSize="14sp"
+                            android:textColor="@color/text_secondary"
+                            android:gravity="center"
+                            tools:text="상품을 불러오지 못했어요" />
+                    </LinearLayout>
+                </FrameLayout>
+
+                <!-- Load more button -->
+                <Button
+                    android:id="@+id/btnLoadMore"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:text="더 보기"
+                    android:visibility="gone" />
+
+            </LinearLayout>
+        </FrameLayout>
     </LinearLayout>
 
-    <!-- FAB: Add clothing -->
+    <!-- FAB: Add clothing (내 옷장 탭에서만 표시) -->
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/fabAddClothing"
         android:layout_width="wrap_content"
@@ -123,8 +346,6 @@
         android:layout_gravity="bottom|end"
         android:layout_margin="16dp"
         android:text="옷 추가"
-        app:icon="@drawable/ic_add"
-        app:layout_anchor="@id/rvClothing"
-        app:layout_anchorGravity="bottom|end" />
+        app:icon="@drawable/ic_add" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

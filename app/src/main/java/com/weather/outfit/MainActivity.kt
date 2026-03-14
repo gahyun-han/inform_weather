@@ -15,8 +15,6 @@ import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.Priority
 import com.google.android.gms.tasks.CancellationTokenSource
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.weather.outfit.adapter.OutfitImageAdapter
 import com.weather.outfit.data.model.WeatherConditionType
 import com.weather.outfit.databinding.ActivityMainBinding
 import com.weather.outfit.ui.MainViewModel
@@ -31,8 +29,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private val viewModel: MainViewModel by viewModels()
     private lateinit var fusedLocationClient: FusedLocationProviderClient
-    private val outfitImageAdapter = OutfitImageAdapter()
-
     private val locationPermissionRequest = registerForActivityResult(
         ActivityResultContracts.RequestMultiplePermissions()
     ) { permissions ->
@@ -72,7 +68,19 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.btnFeedback.setOnClickListener {
-            startActivity(Intent(this, FeedbackActivity::class.java))
+            val weather = viewModel.weather.value
+            val rec = viewModel.recommendation.value
+            val intent = Intent(this, FeedbackActivity::class.java).apply {
+                putExtra("temperature", weather?.temperature ?: 0f)
+                putExtra("feels_like", weather?.feelsLike ?: 0f)
+                putExtra("condition", weather?.weatherCondition ?: "")
+                putExtra("warmth_score", rec?.warmthLevel ?: 0)
+            }
+            startActivity(intent)
+        }
+
+        binding.btnSettings.setOnClickListener {
+            startActivity(Intent(this, SettingsActivity::class.java))
         }
 
         binding.btnRefresh.setOnClickListener {
@@ -84,11 +92,6 @@ class MainActivity : AppCompatActivity() {
             requestWeather()
         }
 
-        // Outfit reference images RecyclerView
-        binding.rvOutfitImages.apply {
-            layoutManager = LinearLayoutManager(this@MainActivity, LinearLayoutManager.HORIZONTAL, false)
-            adapter = outfitImageAdapter
-        }
     }
 
     private fun observeViewModel() {
@@ -155,14 +158,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        viewModel.outfitImages.observe(this) { photos ->
-            if (photos.isNotEmpty()) {
-                outfitImageAdapter.submitList(photos)
-                binding.layoutOutfitImages.visibility = View.VISIBLE
-            } else {
-                binding.layoutOutfitImages.visibility = View.GONE
-            }
-        }
     }
 
     private fun updateWeatherUI(
@@ -194,6 +189,8 @@ class MainActivity : AppCompatActivity() {
         val drawableId = getCharacterDrawableId(outfitKey)
         Glide.with(this)
             .load(drawableId)
+            .fitCenter()
+            .placeholder(R.drawable.character_outfit_mild)
             .into(binding.ivCharacter)
 
         // Accessory icons

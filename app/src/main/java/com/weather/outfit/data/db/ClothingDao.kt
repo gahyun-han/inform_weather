@@ -40,4 +40,7 @@ interface ClothingDao {
 
     @Query("SELECT COUNT(*) FROM clothing_items WHERE isActive = 1")
     suspend fun getCount(): Int
+
+    @Query("DELETE FROM clothing_items")
+    suspend fun deleteAll()
 }

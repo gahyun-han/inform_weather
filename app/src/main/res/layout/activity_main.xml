@@ -46,6 +46,16 @@
                         tools:text="3월 13일 금요일" />
 
                     <ImageButton
+                        android:id="@+id/btnSettings"
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:layout_marginEnd="4dp"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:contentDescription="설정"
+                        android:src="@android:drawable/ic_menu_manage"
+                        android:tint="@color/white" />
+
+                    <ImageButton
                         android:id="@+id/btnRefresh"
                         android:layout_width="36dp"
                         android:layout_height="36dp"
@@ -319,35 +329,6 @@
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
-            <!-- Outfit Reference Images (from Pexels) -->
-            <LinearLayout
-                android:id="@+id/layoutOutfitImages"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginHorizontal="16dp"
-                android:layout_marginBottom="8dp"
-                android:visibility="gone"
-                tools:visibility="visible">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="이런 코디 어때요? 👗"
-                    android:textSize="15sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/text_primary"
-                    android:layout_marginBottom="10dp" />
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rvOutfitImages"
-                    android:layout_width="match_parent"
-                    android:layout_height="160dp"
-                    android:orientation="horizontal"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    tools:listitem="@layout/item_outfit_image"
-                    tools:itemCount="4" />
-            </LinearLayout>
 
             <!-- Feedback insight -->
             <TextView

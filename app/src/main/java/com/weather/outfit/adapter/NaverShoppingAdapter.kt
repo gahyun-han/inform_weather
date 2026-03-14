@@ -6,30 +6,34 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import com.weather.outfit.R
 import com.weather.outfit.api.NaverShoppingItem
-import com.weather.outfit.databinding.ItemOutfitImageBinding
+import com.weather.outfit.databinding.ItemNaverProductBinding
 
-class OutfitImageAdapter(
+class NaverShoppingAdapter(
     private val onItemClick: (NaverShoppingItem) -> Unit = {}
-) : ListAdapter<NaverShoppingItem, OutfitImageAdapter.ViewHolder>(DIFF_CALLBACK) {
+) : ListAdapter<NaverShoppingItem, NaverShoppingAdapter.ViewHolder>(DIFF_CALLBACK) {
 
-    inner class ViewHolder(private val binding: ItemOutfitImageBinding) :
+    inner class ViewHolder(private val binding: ItemNaverProductBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: NaverShoppingItem) {
+            binding.tvProductName.text = item.cleanTitle
+            binding.tvProductPrice.text = item.priceFormatted
+            binding.tvMallName.text = item.mallName
+
             Glide.with(binding.root.context)
                 .load(item.image)
-                .transition(DrawableTransitionOptions.withCrossFade())
+                .placeholder(R.drawable.ic_clothing_placeholder)
                 .centerCrop()
-                .into(binding.ivOutfitImage)
+                .into(binding.ivProductImage)
 
             binding.root.setOnClickListener { onItemClick(item) }
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val binding = ItemOutfitImageBinding.inflate(
+        val binding = ItemNaverProductBinding.inflate(
             LayoutInflater.from(parent.context), parent, false
         )
         return ViewHolder(binding)

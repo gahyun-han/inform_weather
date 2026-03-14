@@ -27,6 +27,8 @@ class ClothingRepository(private val clothingDao: ClothingDao) {
 
     suspend fun getCount() = clothingDao.getCount()
 
+    suspend fun deleteAll() = clothingDao.deleteAll()
+
     /**
      * Selects a complete outfit for the given temperature.
      * Returns a map of category -> best matching item.

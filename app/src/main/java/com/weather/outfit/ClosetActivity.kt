@@ -6,6 +6,8 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
@@ -15,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.chip.Chip
 import com.weather.outfit.adapter.ClothingAdapter
+import com.weather.outfit.adapter.NaverShoppingAdapter
 import com.weather.outfit.data.model.ClothingCategory
 import com.weather.outfit.data.model.ClothingItem
 import com.weather.outfit.databinding.ActivityClosetBinding
@@ -27,7 +30,8 @@ class ClosetActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityClosetBinding
     private val viewModel: ClosetViewModel by viewModels()
-    private lateinit var adapter: ClothingAdapter
+    private lateinit var clothingAdapter: ClothingAdapter
+    private lateinit var catalogAdapter: NaverShoppingAdapter
 
     private var pendingImageUri: Uri? = null
     private var tempCameraFile: File? = null
@@ -64,14 +68,21 @@ class ClosetActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.title = "MY CLOSET"
 
-        setupRecyclerView()
+        setupClosetRecyclerView()
+        setupCatalogRecyclerView()
         setupCategoryChips()
+        setupTabToggle()
         setupFab()
         observeViewModel()
+
+        // Default: 내 옷장 tab checked
+        binding.tabToggle.check(R.id.btnTabCloset)
     }
 
-    private fun setupRecyclerView() {
-        adapter = ClothingAdapter(
+    // ===== SETUP =====
+
+    private fun setupClosetRecyclerView() {
+        clothingAdapter = ClothingAdapter(
             onItemClick = { item ->
                 startActivity(
                     Intent(this, ClothingDetailActivity::class.java)
@@ -83,16 +94,30 @@ class ClosetActivity : AppCompatActivity() {
             }
         )
         binding.rvClothing.layoutManager = GridLayoutManager(this, 2)
-        binding.rvClothing.adapter = adapter
+        binding.rvClothing.adapter = clothingAdapter
+    }
+
+    private fun setupCatalogRecyclerView() {
+        catalogAdapter = NaverShoppingAdapter { item ->
+            try {
+                startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(item.link)))
+            } catch (e: Exception) {
+                Toast.makeText(this, "링크를 열 수 없어요", Toast.LENGTH_SHORT).show()
+            }
+        }
+        binding.rvCatalog.layoutManager = GridLayoutManager(this, 2)
+        binding.rvCatalog.adapter = catalogAdapter
+
+        binding.btnLoadMore.setOnClickListener {
+            viewModel.loadMoreCatalog()
+        }
     }
 
     private fun setupCategoryChips() {
-        // "전체" chip
         binding.chipAll.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) viewModel.setFilter(null)
         }
 
-        // Category chips
         ClothingCategory.values().forEach { category ->
             val chip = Chip(this).apply {
                 text = category.koreanName
@@ -103,6 +128,45 @@ class ClosetActivity : AppCompatActivity() {
             }
             binding.chipGroupCategory.addView(chip)
         }
+
+        // Catalog category chips
+        val catalogChipMap = mapOf(
+            binding.chipCatalogAll to "ALL",
+            binding.chipCatalogTop to "TOP",
+            binding.chipCatalogBottom to "BOTTOM",
+            binding.chipCatalogOuter to "OUTER",
+            binding.chipCatalogDress to "DRESS",
+            binding.chipCatalogShoes to "SHOES",
+            binding.chipCatalogAccessory to "ACCESSORY"
+        )
+        catalogChipMap.forEach { (chip, key) ->
+            chip.setOnCheckedChangeListener { _, isChecked ->
+                if (isChecked) {
+                    val gender = if (binding.genderToggle.checkedButtonId == R.id.btnGenderFemale) "female" else "male"
+                    viewModel.searchCatalog(gender, key)
+                }
+            }
+        }
+
+        // Gender toggle
+        binding.genderToggle.addOnButtonCheckedListener { _, checkedId, isChecked ->
+            if (isChecked) {
+                val gender = if (checkedId == R.id.btnGenderFemale) "female" else "male"
+                val checkedChip = catalogChipMap.entries.firstOrNull { (chip, _) -> chip.isChecked }
+                val categoryKey = checkedChip?.value ?: "ALL"
+                viewModel.searchCatalog(gender, categoryKey)
+            }
+        }
+    }
+
+    private fun setupTabToggle() {
+        binding.tabToggle.addOnButtonCheckedListener { _, checkedId, isChecked ->
+            if (!isChecked) return@addOnButtonCheckedListener
+            when (checkedId) {
+                R.id.btnTabCloset -> showClosetSection()
+                R.id.btnTabCatalog -> showCatalogSection()
+            }
+        }
     }
 
     private fun setupFab() {
@@ -111,9 +175,36 @@ class ClosetActivity : AppCompatActivity() {
         }
     }
 
+    // ===== TAB SWITCHING =====
+
+    private fun showClosetSection() {
+        binding.sectionCloset.visibility = View.VISIBLE
+        binding.sectionCatalog.visibility = View.GONE
+        binding.fabAddClothing.visibility = View.VISIBLE
+    }
+
+    private fun showCatalogSection() {
+        binding.sectionCloset.visibility = View.GONE
+        binding.sectionCatalog.visibility = View.VISIBLE
+        binding.fabAddClothing.visibility = View.GONE
+
+        // Load on first open (gender toggle triggers search via listener if already checked)
+        if (!viewModel.catalogLoaded) {
+            if (binding.genderToggle.checkedButtonId == View.NO_ID) {
+                binding.genderToggle.check(R.id.btnGenderFemale)
+                // listener will call searchCatalog
+            } else {
+                viewModel.searchCatalog("female", "ALL")
+            }
+        }
+    }
+
+    // ===== OBSERVE =====
+
     private fun observeViewModel() {
+        // My Closet
         viewModel.filteredItems.observe(this) { items ->
-            adapter.submitList(items)
+            clothingAdapter.submitList(items)
             binding.tvEmptyCloset.visibility = if (items.isEmpty()) View.VISIBLE else View.GONE
             binding.rvClothing.visibility = if (items.isEmpty()) View.GONE else View.VISIBLE
         }
@@ -128,7 +219,28 @@ class ClosetActivity : AppCompatActivity() {
                 viewModel.clearStatus()
             }
         }
+
+        // Catalog
+        viewModel.catalogItems.observe(this) { items ->
+            catalogAdapter.submitList(items)
+            val isEmpty = items.isEmpty() && viewModel.catalogLoading.value != true
+            binding.layoutCatalogEmpty.visibility = if (isEmpty) View.VISIBLE else View.GONE
+            binding.btnLoadMore.visibility = if (items.isNotEmpty()) View.VISIBLE else View.GONE
+        }
+
+        viewModel.catalogLoading.observe(this) { loading ->
+            binding.pbCatalogLoading.visibility = if (loading) View.VISIBLE else View.GONE
+        }
+
+        viewModel.catalogError.observe(this) { error ->
+            if (error != null) {
+                binding.layoutCatalogEmpty.visibility = View.VISIBLE
+                binding.tvCatalogError.text = error
+            }
+        }
     }
+
+    // ===== MY CLOSET ACTIONS =====
 
     private fun checkPermissionsAndShowDialog() {
         val permissions = mutableListOf<String>()
@@ -160,14 +272,12 @@ class ClosetActivity : AppCompatActivity() {
             val uri = ImageUtils.getFileUri(this, photoFile)
             cameraLauncher.launch(uri)
             dialog.dismiss()
-            // Note: re-show dialog after camera returns (simplified flow)
         }
 
         dialogBinding.btnPickGallery.setOnClickListener {
             galleryLauncher.launch("image/*")
         }
 
-        // Warmth level slider label
         dialogBinding.sliderWarmth.addOnChangeListener { _, value, _ ->
             dialogBinding.tvWarmthLabel.text = when (value.toInt()) {
                 1 -> "매우 얇음 (민소매/반팔)"
@@ -215,6 +325,32 @@ class ClosetActivity : AppCompatActivity() {
             .setMessage("\"${item.name}\"을(를) 옷장에서 제거할까요?")
             .setPositiveButton("제거") { _, _ ->
                 viewModel.deleteClothingItem(item)
+            }
+            .setNegativeButton("취소", null)
+            .show()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.menu_closet, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_clear_closet -> {
+                showClearAllDialog()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    private fun showClearAllDialog() {
+        AlertDialog.Builder(this)
+            .setTitle("옷장 전체 비우기")
+            .setMessage("옷장에 있는 모든 옷(${viewModel.clothingCount.value ?: 0}개)을 삭제할까요?\n이 작업은 되돌릴 수 없어요.")
+            .setPositiveButton("전체 삭제") { _, _ ->
+                viewModel.deleteAllClothingItems()
             }
             .setNegativeButton("취소", null)
             .show()

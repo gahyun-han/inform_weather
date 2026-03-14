@@ -1,7 +1,16 @@
+import java.util.Properties
+
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'com.google.devtools.ksp'
+}
+
+// Load API keys from local.properties (not committed to git)
+def localProps = new Properties()
+def localPropsFile = rootProject.file("local.properties")
+if (localPropsFile.exists()) {
+    localPropsFile.withInputStream { localProps.load(it) }
 }
 
 android {
@@ -17,8 +26,13 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
-        // OpenWeatherMap API Key - replace with your own key from openweathermap.org
-        buildConfigField "String", "WEATHER_API_KEY", '"YOUR_OPENWEATHERMAP_API_KEY"'
+        // API keys read from local.properties; fall back to placeholder if not set
+        def weatherKey      = localProps.getProperty("WEATHER_API_KEY",      "YOUR_OPENWEATHERMAP_API_KEY")
+        def naverClientId   = localProps.getProperty("NAVER_CLIENT_ID",      "YOUR_NAVER_CLIENT_ID")
+        def naverClientSecret = localProps.getProperty("NAVER_CLIENT_SECRET", "YOUR_NAVER_CLIENT_SECRET")
+        buildConfigField "String", "WEATHER_API_KEY",      "\"${weatherKey}\""
+        buildConfigField "String", "NAVER_CLIENT_ID",      "\"${naverClientId}\""
+        buildConfigField "String", "NAVER_CLIENT_SECRET",  "\"${naverClientSecret}\""
         buildConfigField "String", "WEATHER_BASE_URL", '"https://api.openweathermap.org/data/2.5/"'
     }
 
