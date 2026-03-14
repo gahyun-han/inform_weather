@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">날씨 코디</string>
+    <string name="app_name">날씨패션도우미</string>
 
     <!-- Weather -->
     <string name="weather_clear">맑음</string>
